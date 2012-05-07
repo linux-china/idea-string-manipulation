@@ -1,0 +1,199 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>osmedile.intellij</groupId>
+    <artifactId>string-manipulation</artifactId>
+    <packaging>jar</packaging>
+    <version>1.3-SNAPSHOT</version>
+    <name>String Manipulation</name>
+
+    <url>http://code.google.com/p/idea-string-manip/</url>
+
+
+    <properties>
+        <encoding>UTF-8</encoding>
+        <sourceLevel>1.5</sourceLevel>
+        <targetJDK>1.5</targetJDK>
+        <idea.version>7.0</idea.version>
+        <idea.classifier>7027</idea.classifier>
+    </properties>
+
+    <!--<repositories>-->
+    <!--<repository>-->
+    <!--<id>mevenide</id>-->
+    <!--<name>Mevenide's M2 repo</name>-->
+    <!--<url>http://mevenide.codehaus.org/m2-repository</url>-->
+    <!--</repository>-->
+    <!--<repository>-->
+    <!--<id>codehaus</id>-->
+    <!--<name>Mevenide's M2 repo</name>-->
+    <!--<url>http://repository.codehaus.org</url>-->
+    <!--<releases>-->
+    <!--<updatePolicy>never</updatePolicy>-->
+    <!--</releases>-->
+    <!--</repository>-->
+    <!--</repositories>-->
+
+
+    <developers>
+        <developer>
+            <id>osmedile</id>
+            <name>Olivier Smedile</name>
+            <email>osmedile@gmail.com</email>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:svn:https://idea-string-manip.googlecode.com/svn/trunk/</connection>
+        <developerConnection>scm:svn:https://idea-string-manip.googlecode.com/svn/trunk/</developerConnection>
+        <url>http://idea-string-manip.googlecode.com/svn/trunk/</url>
+    </scm>
+
+
+    <dependencies>
+        <dependency>
+            <groupId>com.intellij.idea</groupId>
+            <artifactId>forms_rt</artifactId>
+            <version>${idea.version}</version>
+            <classifier>${idea.classifier}</classifier>
+        </dependency>
+        <dependency>
+            <groupId>com.intellij.idea</groupId>
+            <artifactId>openapi</artifactId>
+            <version>${idea.version}</version>
+            <classifier>${idea.classifier}</classifier>
+        </dependency>
+        <dependency>
+            <groupId>com.intellij.idea</groupId>
+            <artifactId>idea</artifactId>
+            <version>${idea.version}</version>
+            <classifier>${idea.classifier}</classifier>
+        </dependency>
+        <dependency>
+            <groupId>com.intellij.idea</groupId>
+            <artifactId>annotations</artifactId>
+            <version>${idea.version}</version>
+            <classifier>${idea.classifier}</classifier>
+        </dependency>
+        <dependency>
+            <groupId>com.intellij.idea</groupId>
+            <artifactId>extensions</artifactId>
+            <version>${idea.version}</version>
+            <classifier>${idea.classifier}</classifier>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>3.8.1</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+
+                <plugin>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <configuration>
+                        <encoding>${encoding}</encoding>
+                        <docencoding>${encoding}</docencoding>
+                        <charset>${encoding}</charset>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <artifactId>maven-site-plugin</artifactId>
+                    <configuration>
+                        <outputEncoding>${encoding}</outputEncoding>
+                        <inputEncoding>${encoding}</inputEncoding>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <artifactId>maven-project-info-reports-plugin</artifactId>
+                    <version>2.0.1</version>
+                    <configuration>
+                        <outputEncoding>${encoding}</outputEncoding>
+                        <inputEncoding>${encoding}</inputEncoding>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <artifactId>maven-release-plugin</artifactId>
+                    <configuration>
+                        <!-- executed before a release -->
+                        <preparationGoals>clean verify</preparationGoals>
+                    </configuration>
+                </plugin>
+
+
+                <plugin>
+                    <artifactId>maven-assembly-plugin</artifactId>
+                    <configuration>
+                        <descriptors>
+                            <descriptor>src/main/assembly/src.xml</descriptor>
+                        </descriptors>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+
+    <reporting>
+        <plugins>
+            <plugin>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <configuration>
+                    <links>
+                        <link>http://java.sun.com/j2se/1.5/docs/api</link>
+                        <aggregate>true</aggregate>
+                    </links>
+                </configuration>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>javadoc</report>
+                            <report>test-javadoc</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
+
+            <!-- Surefire -->
+            <plugin>
+                <artifactId>maven-surefire-report-plugin</artifactId>
+            </plugin>
+
+            <!-- Jxr -->
+            <plugin>
+                <artifactId>maven-jxr-plugin</artifactId>
+            </plugin>
+
+
+            <plugin>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>index</report>
+                            <report>summary</report>
+                            <report>scm</report>
+                            <report>project-team</report>
+                            <!--<report>dependency-convergence</report>-->
+                            <!--<report>dependencies</report>-->
+                            <!--<report>cim</report>-->
+                            <!--<report>issue-tracking</report>-->
+                            <!--<report>mailing-list</report>-->
+                            <!--<report>license</report>-->
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
+
+        </plugins>
+    </reporting>
+</project>
